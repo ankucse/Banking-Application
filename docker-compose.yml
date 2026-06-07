@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # MySQL for Auth Service
+  mysql:
+    image: mysql:8.0
+    container_name: banking-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: auth_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - banking-network
+    restart: unless-stopped
+
+  # MongoDB for Onboarding Service
+  mongodb:
+    image: mongo:6.0
+    container_name: banking-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: mongopassword
+      MONGO_INITDB_DATABASE: onboarding_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - banking-network
+    restart: unless-stopped
+
+  # Redis for API Gateway Rate Limiting & Auth Sessions
+  redis:
+    image: redis:7.0-alpine
+    container_name: banking-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - banking-network
+    restart: unless-stopped
+
+  # Apache Kafka (KRaft mode - no Zookeeper)
+  kafka:
+    image: bitnami/kafka:3.5
+    container_name: banking-kafka
+    environment:
+      - KAFKA_ENABLE_KRAFT=yes
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - KAFKA_CFG_BROKER_ID=1
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka-data:/bitnami/kafka
+    networks:
+      - banking-network
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
+  mongodb-data:
+  kafka-data:
+
+networks:
+  banking-network:
+    driver: bridge
