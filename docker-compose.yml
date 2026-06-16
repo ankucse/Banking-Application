@@ -25,7 +25,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: mongopassword
       MONGO_INITDB_DATABASE: onboarding_db
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - mongodb-data:/data/db
     networks:
@@ -48,8 +48,6 @@ services:
     container_name: banking-kafka
     ports:
       - "9092:9092"
-    environment:
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092,BROKER://kafka:29092
     volumes:
       - kafka-data:/var/lib/kafka/data
     networks:

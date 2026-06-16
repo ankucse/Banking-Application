@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --color-primary: #1d4ed8;
   --color-secondary: #9333ea;
@@ -8,10 +10,12 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f3f4f6;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: theme('colors.slate.50');
+}
+
+.dark body {
+  background-color: #1A1D2D;
 }

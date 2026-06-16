@@ -19,6 +19,7 @@ spring:
               - PUT
               - DELETE
               - OPTIONS
+            allowedHeaders: "*"
       routes:
         - id: auth-service
           uri: http://localhost:8081
@@ -36,3 +37,7 @@ spring:
           uri: http://localhost:8084
           predicates:
             - Path=/api/v1/ledger/**
+        - id: payment-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/v1/beneficiaries/**,/api/v1/payments/**,/api/v1/wallets/**,/api/v1/upi/**

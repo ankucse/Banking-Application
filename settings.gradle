@@ -1,8 +1,9 @@
 rootProject.name = 'banking-platform'
 include 'api-gateway'
-include 'auth-service'
-include 'onboarding-service'
-include 'notification-service'
 include 'customer-service'
+include 'onboarding-service'
 include 'ledger-service'
-
+include 'api-gateway'
+include 'auth-service'
+include 'notification-service'
+include 'payment-service'

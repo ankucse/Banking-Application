@@ -5,6 +5,6 @@ spring:
     name: onboarding-service
   data:
     mongodb:
-      uri: mongodb://mongoadmin:mongopassword@localhost:27017/onboarding_db?authSource=admin
+      uri: mongodb://mongoadmin:mongopassword@localhost:27018/onboarding_db?authSource=admin
   kafka:
     bootstrap-servers: localhost:9092
