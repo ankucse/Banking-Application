@@ -1,0 +1,9 @@
+@echo off
+echo Starting Docker databases...
+docker-compose up -d
+
+echo Waiting for databases to initialize...
+timeout /t 5 /nobreak > NUL
+
+echo Starting Spring Boot Microservices...
+.\gradlew.bat :api-gateway:bootRun :auth-service:bootRun :onboarding-service:bootRun :notification-service:bootRun --parallel
