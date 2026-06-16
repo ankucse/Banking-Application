@@ -1,0 +1,17 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: ledger-service
+  datasource:
+    url: jdbc:mysql://localhost:3307/core_ledger?createDatabaseIfNotExist=true&useSSL=false
+    username: root
+    password: "@246810Alpha"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

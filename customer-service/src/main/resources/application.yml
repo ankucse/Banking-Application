@@ -1,0 +1,21 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: customer-service
+  datasource:
+    url: jdbc:mysql://localhost:3307/cif_db?createDatabaseIfNotExist=true&useSSL=false
+    username: root
+    password: "@246810Alpha"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+encryption:
+  aes:
+    key: ${AES_ENCRYPTION_KEY:MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=}

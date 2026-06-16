@@ -28,3 +28,11 @@ spring:
           uri: http://localhost:8082
           predicates:
             - Path=/api/v1/onboarding/**
+        - id: customer-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/cif/**
+        - id: ledger-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/v1/ledger/**
