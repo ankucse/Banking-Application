@@ -40,7 +40,7 @@ export default function Dashboard() {
       <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col">
         <div className="h-16 flex items-center px-6 border-b border-slate-800">
           <Building2 className="w-6 h-6 text-indigo-500 mr-3" />
-          <span className="text-white font-bold text-lg tracking-wide">Subbu Bank of India[SBI]</span>
+          <span className="text-white font-bold text-lg tracking-wide">Antigravity</span>
         </div>
         
         <nav className="flex-1 py-6 px-3 space-y-1">
